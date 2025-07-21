@@ -1,4 +1,4 @@
-# Linux Services Manager (Golem\_541)
+# Linux Services Manager
 
 A terminal-based system services dashboard and management tool built with Python and Rich.
 
