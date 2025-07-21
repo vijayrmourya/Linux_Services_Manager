@@ -1,24 +1,79 @@
-# Linux_Services_Manager
+# Linux Services Manager (Golem\_541)
 
-A terminal-based interactive tool to monitor, manage, and troubleshoot multiple Linux system services using a clean and user-friendly Bash script interface.
+A terminal-based system services dashboard and management tool built with Python and Rich.
 
----
+## Features
 
-## 📌 Features
+* **List Services**: Display all systemd services with status, colorized and sorted (running first).
+* **Manage a Service**:
 
-✅ **Service Status Dashboard**  
-- Displays a color-coded table of specified services and their statuses (Running, Stopped, Failed)
+  * Start, Stop, Restart, Disable
+  * View logs via `journalctl` (last 100, follow live, since boot, errors)
+  * Fallback to raw syslog (`/var/log/syslog` or `/var/log/messages`)
+* **Find a Service**: Search by keyword in unit name or description, view details and unit file location.
 
-⚙️ **Start / Stop / Restart Services**  
-- Select any service and perform management actions (start, stop, restart) directly from the terminal
+## Prerequisites
 
-📄 **View Recent Logs**  
-- Instantly view the last 20 lines of system logs for any managed service
+* Python 3.6+
+* [Rich](https://github.com/Textualize/rich) library
+* Systemd (Linux distribution with `systemctl` & `journalctl`)
 
-🧯 **Error Handling**  
-- Gracefully handles invalid service names, permission issues, and failed operations
+## Installation
 
-🔐 **Sudo-aware**  
-- Automatically uses `sudo` for actions that require elevated permissions
+1. **Clone the repository**
 
----
+   ```bash
+   git clone https://github.com/yourusername/linux-services-manager.git
+   cd linux-services-manager
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   pip install rich
+   ```
+
+3. **Make script executable**
+
+   ```bash
+   chmod +x main.py
+   ```
+
+## Usage
+
+Run the dashboard:
+
+```bash
+python3 main.py
+```
+
+You will be presented with a main menu:
+
+1. **List all services** — Shows a colorized table of all services and their statuses.
+2. **Manage a service** — Enter a submenu to control a specific service or view logs.
+3. **Find a service** — Search for services by keyword and view details.
+4. **Exit** — Quit the application.
+
+### Manage a Service
+
+After selecting a service, choose from:
+
+* Start, Stop, Restart, Disable
+* View last 100 `journalctl` entries
+* Follow live logs (`journalctl -f`)
+* View logs since last boot
+* View only error logs
+* Tail raw `/var/log/syslog` or `/var/log/messages`
+
+### Find a Service
+
+Search by keyword to list matching units, then view `systemctl status` and the service unit file path.
+
+## Contributing
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/XYZ`).
+3. Make your changes and commit (`git commit -m 'Add XYZ feature'`).
+4. Push to your branch (`git push origin feature/XYZ`).
+5. Open a Pull Request.
+
