@@ -14,6 +14,10 @@ def list_all_services():
     lines = proc.stdout.splitlines()
     return lines
 
+def console_printer(option_list):
+    for i, letter in enumerate(option_list, start=1):
+        console.print(f"[green]{i}[/]: {letter}")
+    return
 
 def list_services():
     """Fetch, sort, and display all system services with their status."""
@@ -88,18 +92,15 @@ def manage_service(selected: str):
     while True:
         console.clear()
         console.print(f"\n[bold cyan]{selected} Management Menu[/]\n")
-        console.print("[green]1.[/] Start service")
-        console.print("[green]2.[/] Stop service")
-        console.print("[green]3.[/] Restart service")
-        console.print("[green]4.[/] Disable service")
-        console.print("[green]5.[/] View last 100 journalctl logs")
-        console.print("[green]6.[/] Follow journalctl live logs")
-        console.print("[green]7.[/] View journalctl logs since boot")
-        console.print("[green]8.[/] View journalctl error logs")
-        console.print("[green]9.[/] View raw /var/log/syslog logs")
-        console.print("[green]10.[/] View raw /var/log/messages logs")
-        console.print("[green]H.[/] Home (main menu)")
-        console.print("[green]E.[/] Exit")
+        console_printer(
+            [
+                "Start service", "Stop service", "Restart service", "Disable service", "View last 100 journalctl logs",
+                "View journalctl logs since boot", "View journalctl error logs", "View raw /var/log/syslog logs",
+                "View raw /var/log/messages logs"
+            ]
+        )
+        console.print("[green]H:[/] Home (main menu)")
+        console.print("[green]E:[/] Exit")
 
         choices = [str(i) for i in range(1, 11)] + ["H", "E"]
         choice = Prompt.ask("Enter choice", choices=choices)
